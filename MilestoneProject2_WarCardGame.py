@@ -34,14 +34,9 @@ class Deck:
             self.deckp2.append(self.all_cards.pop(-1))
         
         return [self.deckp1, self.deckp2]
-            
-    #def __reduce__(self):
-        #return self.deckp1, self.deckp2 #f"Deck 1 has {len(self.deckp1)} cards and Deck 2 has {len(self.deckp1)} cards"
 
 getbothdecks = Deck()
-getbothdecks.shuffleanddivide()
 deckjogadores = getbothdecks.shuffleanddivide()
-
 winner = True
 
 class GameOn:
