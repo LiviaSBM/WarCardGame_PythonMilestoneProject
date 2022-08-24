@@ -79,12 +79,13 @@ class GameOn:
                 self.decktable.append(self.cardobj1.pop(0))
                 self.decktable.append(self.cardobj2.pop(0))
         
-    def __str__(self):
+    def Winner(self):
         if len(self.deckp1)==0:
-            return "Player 2 wins!"
+            print('Player 2 wins!') 
         elif len(self.deckp2)==0:
-            return "Player 1 wins!"
+            print('Player 1 wins!') 
 
 
 marrumteste = GameOn(deckjogadores[0],deckjogadores[1])
-print(marrumteste)
+outrocoiso = str(marrumteste)
+print(outrocoiso)
