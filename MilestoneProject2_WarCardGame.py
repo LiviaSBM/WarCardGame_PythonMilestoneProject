@@ -37,6 +37,8 @@ class Deck:
 
 getbothdecks = Deck()
 deckjogadores = getbothdecks.shuffleanddivide()
+
+
 winner = True
 
 class GameOn:
@@ -48,10 +50,11 @@ class GameOn:
         self.cardobj2 = []
         
     def Game(self):
+        global winner
         
         while winner:
-            self.cardobj1 = self.deckp1.pop(-1)
-            self.cardobj2 = self.deckp2.pop(-1)
+            self.cardobj1.append(self.deckp1.pop(-1))
+            self.cardobj2.append(self.deckp2.pop(-1))
             carta1= str(self.cardobj1)
             carta2= str(self.cardobj2)
             carta1= carta1.split()
@@ -87,5 +90,5 @@ class GameOn:
 
 
 marrumteste = GameOn(deckjogadores[0],deckjogadores[1])
-outrocoiso = str(marrumteste)
-print(outrocoiso)
+jogovalendo = marrumteste.Game()
+resultadofinal = marrumteste.Winner()
