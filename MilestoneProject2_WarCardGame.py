@@ -41,25 +41,27 @@ deckjogadores = getbothdecks.shuffleanddivide()
 
 class CardsOnTable:
     def __init__(self,deck01,deck02):
-        self.deck01 = deckjogadores[0]
-        self.deck02 = deckjogadores[1]
+        self.deck01 = deckjogadores[0] #deck do jogador 1
+        self.deck02 = deckjogadores[1] #deck do jogador 2
         self.tabledeck = []
                 
     def cardsontable(self):
         self.tabledeck.append(self.deck01.pop(-1))
         self.tabledeck.append(self.deck02.pop(-1))
-        return self.tabledeck
+        
+        return self.tabledeck, self.deck01, self.deck02 
+        #cartas da mesa, deck REDUZIDO dos J1 e J2
 
 teste1 = CardsOnTable(deckjogadores[0],deckjogadores[1])
 teste1importacao = teste1.cardsontable()
 
 class GameTurn:
     def __init__(self,cardp1,cardp2,deckjogador1,deckjogador2):
-        self.cardp1 = teste1importacao[0]    #Carta de cada jogador
-        self.cardp2 = teste1importacao[1]
-        self.deckjogador1 = deckjogadores[0] #Deck de cada jogador
-        self.deckjogador2 = deckjogadores[1]
-        self.tempdecktable = []              #Cartas acumuladas na mesa
+        self.cardp1, self.cardp2 = teste1importacao[0]    #Carta de cada jogador
+        #self.cardp2 = teste1importacao[1]
+        self.deckjogador1 = teste1importacao[1]           #Deck de cada jogador
+        self.deckjogador2 = teste1importacao[2]
+        self.tempdecktable = []                           #Cartas acumuladas na mesa
         
         
     def cardcomparison(self):
@@ -72,27 +74,24 @@ class GameTurn:
             
             self.deckjogador1.append(self.cardp1)
             self.deckjogador1.append(self.cardp2)
-            #self.cardp1=[]
-            #self.cardp2=[]
             self.deckjogador1.extend(self.tempdecktable)
             self.tempdecktable = []
             
             return self.deckjogador1, self.deckjogador2
             
-            #return f"esse é o comprimento: {len(self.cardp1)} e {len(self.cardp2)} e {len(self.tempdecktable)} e {len(self.deckjogador1)}"
+            #return f"esse é o comprimento: {len(self.cardp1)} e 
+            # {len(self.cardp2)} e {len(self.tempdecktable)} e 
+            # {len(self.deckjogador1)}"
             #return "pero que si"
         
         elif values[splitc1[0]]<values[splitc2[0]]:
             self.deckjogador2.append(self.cardp1)
             self.deckjogador2.append(self.cardp2)
-            #self.cardp1=[]
-            #self.cardp2=[]
             self.deckjogador1.extend(self.tempdecktable)
             self.tempdecktable = []
             
             return self.deckjogador1, self.deckjogador2
             
-            #return "pero que no"
         else:
             self.tempdecktable.append(self.cardp1)
             self.tempdecktable.append(self.cardp2)
@@ -100,6 +99,4 @@ class GameTurn:
             return self.deckjogador1, self.deckjogador2
 
 teste2 = GameTurn(teste1importacao[0],teste1importacao[1],deckjogadores[0],deckjogadores[1])
-#print(teste2.cardcomparison())
 teste2 = teste2.cardcomparison()
-print(teste2[1])
