@@ -39,56 +39,67 @@ getbothdecks = Deck()
 deckjogadores = getbothdecks.shuffleanddivide()
 
 
-winner = True
-
-class GameOn:
-    def __init__(self,deckp1,deckp2):
-        self.deckp1 = deckjogadores[0]
-        self.deckp2 = deckjogadores[1]
-        self.decktable = []
-        self.cardobj1 = []
-        self.cardobj2 = []
-        
-    def Game(self):
-        global winner
-        
-        while winner:
-            self.cardobj1.append(self.deckp1.pop(-1))
-            self.cardobj2.append(self.deckp2.pop(-1))
-            carta1= str(self.cardobj1)
-            carta2= str(self.cardobj2)
-            carta1= carta1.split()
-            carta2= carta2.split()
-            
-                        
-            if values[carta1[0]] > values[carta2[0]]:
-                self.deckp1.append(self.cardobj1.pop(0))
-                self.deckp1.append(self.cardobj2.pop(0))
-                while len(self.decktable) >0:
-                    self.deckp1.append(self.decktable.pop(0))
-                if len(self.deckp1)==0 or len(self.deckp2)==0:
-                    winner=False
-                    break                        
+class CardsOnTable:
+    def __init__(self,deck01,deck02):
+        self.deck01 = deckjogadores[0]
+        self.deck02 = deckjogadores[1]
+        self.tabledeck = []
                 
-            elif values[carta1[0]] < values[carta2[0]]:
-                self.deckp2.append(self.cardobj1.pop(0))
-                self.deckp2.append(self.cardobj2.pop(0))
-                while len(self.decktable) >0:
-                    self.deckp2.append(self.decktable.pop(0))
-                if len(self.deckp1)==0 or len(self.deckp2)==0:
-                    winner=False
-                    break
-            else:
-                self.decktable.append(self.cardobj1.pop(0))
-                self.decktable.append(self.cardobj2.pop(0))
+    def cardsontable(self):
+        self.tabledeck.append(self.deck01.pop(-1))
+        self.tabledeck.append(self.deck02.pop(-1))
+        return self.tabledeck
+
+teste1 = CardsOnTable(deckjogadores[0],deckjogadores[1])
+teste1importacao = teste1.cardsontable()
+
+class GameTurn:
+    def __init__(self,cardp1,cardp2,deckjogador1,deckjogador2):
+        self.cardp1 = teste1importacao[0]    #Carta de cada jogador
+        self.cardp2 = teste1importacao[1]
+        self.deckjogador1 = deckjogadores[0] #Deck de cada jogador
+        self.deckjogador2 = deckjogadores[1]
+        self.tempdecktable = []              #Cartas acumuladas na mesa
         
-    def Winner(self):
-        if len(self.deckp1)==0:
-            print('Player 2 wins!') 
-        elif len(self.deckp2)==0:
-            print('Player 1 wins!') 
+        
+    def cardcomparison(self):
+        splitc1 = str(self.cardp1)
+        splitc2 = str(self.cardp2)
+        splitc1 = splitc1.split()
+        splitc2 = splitc2.split()
+        
+        if values[splitc1[0]]>values[splitc2[0]]:
+            
+            self.deckjogador1.append(self.cardp1)
+            self.deckjogador1.append(self.cardp2)
+            #self.cardp1=[]
+            #self.cardp2=[]
+            self.deckjogador1.extend(self.tempdecktable)
+            self.tempdecktable = []
+            
+            return self.deckjogador1, self.deckjogador2
+            
+            #return f"esse é o comprimento: {len(self.cardp1)} e {len(self.cardp2)} e {len(self.tempdecktable)} e {len(self.deckjogador1)}"
+            #return "pero que si"
+        
+        elif values[splitc1[0]]<values[splitc2[0]]:
+            self.deckjogador2.append(self.cardp1)
+            self.deckjogador2.append(self.cardp2)
+            #self.cardp1=[]
+            #self.cardp2=[]
+            self.deckjogador1.extend(self.tempdecktable)
+            self.tempdecktable = []
+            
+            return self.deckjogador1, self.deckjogador2
+            
+            #return "pero que no"
+        else:
+            self.tempdecktable.append(self.cardp1)
+            self.tempdecktable.append(self.cardp2)
+            
+            return self.deckjogador1, self.deckjogador2
 
-
-marrumteste = GameOn(deckjogadores[0],deckjogadores[1])
-jogovalendo = marrumteste.Game()
-resultadofinal = marrumteste.Winner()
+teste2 = GameTurn(teste1importacao[0],teste1importacao[1],deckjogadores[0],deckjogadores[1])
+#print(teste2.cardcomparison())
+teste2 = teste2.cardcomparison()
+print(teste2[1])
