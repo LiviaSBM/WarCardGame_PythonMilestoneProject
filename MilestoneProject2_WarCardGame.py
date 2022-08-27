@@ -52,8 +52,8 @@ class CardsOnTable:
         return self.tabledeck, self.deck01, self.deck02 
         #cartas da mesa, deck REDUZIDO dos J1 e J2
 
-#teste1 = CardsOnTable(deckjogadores[0],deckjogadores[1])
-#teste1importacao = teste1.cardsontable()
+teste1 = CardsOnTable(deckjogadores[0],deckjogadores[1])
+teste1importacao = teste1.cardsontable()
 
 class GameTurn:
     def __init__(self,cardp1,cardp2,deckjogador1,deckjogador2):
@@ -78,11 +78,6 @@ class GameTurn:
             self.tempdecktable = []
             
             return self.deckjogador1, self.deckjogador2
-            
-            #return f"esse é o comprimento: {len(self.cardp1)} e 
-            # {len(self.cardp2)} e {len(self.tempdecktable)} e 
-            # {len(self.deckjogador1)}"
-            #return "pero que si"
         
         elif values[splitc1[0]]<values[splitc2[0]]:
             self.deckjogador2.append(self.cardp1)
@@ -98,8 +93,8 @@ class GameTurn:
             
             return self.deckjogador1, self.deckjogador2
 
-#teste2 = GameTurn(teste1importacao[0],teste1importacao[1],deckjogadores[0],deckjogadores[1])
-#teste2 = teste2.cardcomparison()
+teste2 = GameTurn(teste1importacao[0],teste1importacao[1],deckjogadores[0],deckjogadores[1])
+teste2 = teste2.cardcomparison()
 
 class GameRoll:
     
@@ -128,3 +123,8 @@ class GameRoll:
                 winner= False
                 return "Player 2 wins!"
                 break
+
+            
+rodadasemwhile = GameRoll(teste2[0],teste2[1])
+resultadofinal = rodadasemwhile.gameon()
+print(resultadofinal)           
