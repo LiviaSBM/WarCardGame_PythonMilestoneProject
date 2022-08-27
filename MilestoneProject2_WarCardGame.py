@@ -52,8 +52,8 @@ class CardsOnTable:
         return self.tabledeck, self.deck01, self.deck02 
         #cartas da mesa, deck REDUZIDO dos J1 e J2
 
-teste1 = CardsOnTable(deckjogadores[0],deckjogadores[1])
-teste1importacao = teste1.cardsontable()
+#teste1 = CardsOnTable(deckjogadores[0],deckjogadores[1])
+#teste1importacao = teste1.cardsontable()
 
 class GameTurn:
     def __init__(self,cardp1,cardp2,deckjogador1,deckjogador2):
@@ -98,5 +98,33 @@ class GameTurn:
             
             return self.deckjogador1, self.deckjogador2
 
-teste2 = GameTurn(teste1importacao[0],teste1importacao[1],deckjogadores[0],deckjogadores[1])
-teste2 = teste2.cardcomparison()
+#teste2 = GameTurn(teste1importacao[0],teste1importacao[1],deckjogadores[0],deckjogadores[1])
+#teste2 = teste2.cardcomparison()
+
+class GameRoll:
+    
+    def __init__(self,deckp1,deckp2):
+        self.deckjogador1 = teste2[0] #Deck de cada jogador
+        self.deckjogador2 = teste2[1]
+        
+    def gameon(self):
+        winner = True
+        
+        while winner:
+            
+            teste1 = CardsOnTable(self.deckjogador1,self.deckjogador2)
+            teste1importacao = teste1.cardsontable()
+            
+            teste2 = GameTurn(teste1importacao[0],teste1importacao[0],teste1importacao[1],teste1importacao[2])
+            teste2importacao = teste2.cardcomparison()
+            
+            
+            if len(self.deckjogador2) == 0:
+                winner= False
+                return "Player 1 wins!"
+                break
+                
+            elif len(self.deckjogador1) == 0:
+                winner= False
+                return "Player 2 wins!"
+                break
